@@ -96,7 +96,6 @@ class Agent(threading.Thread):
     def run(self):
         elapsed = 0
         trans = self.script_module.Transaction()
-        trans.custom_timers = {}
 
         # scripts have access to these vars, which can be useful for loading unique data
         trans.thread_num = self.thread_num
@@ -104,7 +103,9 @@ class Agent(threading.Thread):
 
         while elapsed < self.run_time:
             error = ''
+            trans.custom_timers = {}
             start = self.default_timer()
+            
 
             try:
                 trans.run()
